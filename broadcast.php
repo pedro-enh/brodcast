@@ -442,7 +442,7 @@ function getUserBroadcasts($discord_user_id) {
                         // Check if user is admin using admin-helper
                         require_once 'admin-helper.php';
                         if (isAdmin()): ?>
-                        <a href="admin-access.php" class="btn btn-warning btn-small">
+                        <a href="https://discord-brodcast.zeabur.app/admin-access.php" class="btn btn-warning btn-small">
                             <i class="fas fa-crown"></i>
                             Admin Access
                         </a>
