@@ -106,35 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             try {
-                // Initialize database
-                require_once 'database.php';
-                $database = initializeDatabase();
-                
-                // Check if target user exists, if not create them
-                $stmt = $database->prepare("SELECT id, credits FROM users WHERE discord_id = ?");
-                $stmt->execute([$targetUserId]);
-                $targetUser = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-                if (!$targetUser) {
-                    // Create new user
-                    $stmt = $database->prepare("INSERT INTO users (discord_id, username, credits, created_at) VALUES (?, ?, ?, ?)");
-                    $stmt->execute([$targetUserId, 'Unknown User', $creditsAmount, date('Y-m-d H:i:s')]);
-                    $targetUserId_db = $database->lastInsertId();
-                    $oldCredits = 0;
-                } else {
-                    // Update existing user
-                    $targetUserId_db = $targetUser['id'];
-                    $oldCredits = $targetUser['credits'];
-                    $newCredits = $oldCredits + $creditsAmount;
-                    
-                    $stmt = $database->prepare("UPDATE users SET credits = ?, updated_at = ? WHERE id = ?");
-                    $stmt->execute([$newCredits, date('Y-m-d H:i:s'), $targetUserId_db]);
-                }
-                
-                // Record transaction
-                $description = "Admin credit addition: {$creditsAmount} credits - {$reason}";
-                $stmt = $database->prepare("INSERT INTO transactions (user_id, type, amount, description, created_at) VALUES (?, ?, ?, ?, ?)");
-                $stmt->execute([$targetUserId_db, 'credit', $creditsAmount, $description, date('Y-m-d H:i:s')]);
+                // Use the existing database instance
+                $db->addCredits($targetUserId, $creditsAmount, $reason);
                 
                 echo json_encode([
                     'success' => true,
@@ -201,7 +174,7 @@ $broadcasts = $db->getUserBroadcasts($user['id'], 10);
                         <?php
                         // Check if user is admin using admin-helper
                         if ($isAdmin): ?>
-                        <a href="admin-access.php" class="btn btn-warning btn-small">
+                        <a href="https://discord-brodcast.zeabur.app/admin-access.php" class="btn btn-warning btn-small">
                             <i class="fas fa-crown"></i>
                             Admin Access
                         </a>
