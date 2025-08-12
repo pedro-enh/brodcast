@@ -361,7 +361,7 @@ $broadcasts = $db->getUserBroadcasts($user['id'], 10);
                             <i class="fas fa-robot"></i>
                             <div>
                                 <h4>Payment Detection</h4>
-                                <p>If your payment isn't detected automatically, you can manually check for new ProBot transfers or ask the server owner to use the <code>!addcredits</code> command.</p>
+                                <p>If your payment isn't detected automatically, you can ask support server discord in ticket support.</p>
                                 <button class="btn btn-info" onclick="runProbotMonitor()">
                                     <i class="fas fa-sync"></i>
                                     Check for Payments
