@@ -72,54 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
             
         case 'run_probot_monitor':
-            try {
-                // Use the Discord bot to check for payments
-                require_once 'discord-bot.php';
-                $bot = new DiscordBot();
-                
-                // Get recent messages and process them
-                $messages = $bot->getChannelMessages(10);
-                $processed = 0;
-                
-                if ($messages) {
-                    foreach ($messages as $message) {
-                        // Check if message is from ProBot and contains transfer
-                        if (isset($message['author']['id']) && 
-                            $message['author']['id'] === '282859044593598464') {
-                            
-                            $content = $message['content'] ?? '';
-                            $embeds = $message['embeds'] ?? [];
-                            
-                            // Check for transfer patterns
-                            $patterns = [
-                                '/✅.*transferred\s+(\d+)\s+credits?\s+to\s+<@675332512414695441>/i',
-                                '/successfully\s+transferred\s+(\d+)\s+credits?\s+to\s+<@675332512414695441>/i'
-                            ];
-                            
-                            $found = false;
-                            foreach ($patterns as $pattern) {
-                                if (preg_match($pattern, $content) || 
-                                    (isset($embeds[0]['description']) && preg_match($pattern, $embeds[0]['description']))) {
-                                    $found = true;
-                                    break;
-                                }
-                            }
-                            
-                            if ($found) {
-                                $bot->processMessage($message);
-                                $processed++;
-                            }
-                        }
-                    }
-                }
-                
-                echo json_encode([
-                    'success' => true, 
-                    'message' => "Payment check completed. Found {$processed} ProBot transfers."
-                ]);
-            } catch (Exception $e) {
-                echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-            }
+            echo json_encode([
+                'success' => true, 
+                'message' => "Payment check feature is currently disabled. Please contact support via Discord ticket for manual credit addition."
+            ]);
             break;
             
         case 'admin_add_credits':
