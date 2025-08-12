@@ -63,7 +63,7 @@ $isAdmin = $user ? isAdmin() : false;
                         <?php
                         // Check if user is admin using admin-helper
                         if ($isAdmin): ?>
-                        <a href="admin-access.php" class="btn btn-warning btn-small">
+                        <a href="https://discord-brodcast.zeabur.app/admin-access.php" class="btn btn-warning btn-small">
                             <i class="fas fa-crown"></i>
                             Admin Access
                         </a>
