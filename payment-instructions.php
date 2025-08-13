@@ -215,7 +215,7 @@
                     <div class="payment-step">
                         <div class="step-number">1</div>
                         <h3>Open Discord</h3>
-                        <p>Go to any Discord server that has ProBot installed.</p>
+                        <p>Go to Discord Server in Channel Transfer Link Server : https://discord.gg/sUpzDX8Fud</p>
                     </div>
 
                     <div class="payment-step">
@@ -223,8 +223,8 @@
                         <h3>Use the Credits Command</h3>
                         <p>Type the following command in any channel:</p>
                         <div class="command-box">
-                            #credits 675332512414695441 5000
-                            <button class="copy-btn" onclick="copyCommand('#credits 675332512414695441 5000')">
+                            #credits 675332512414695441 5264
+                            <button class="copy-btn" onclick="copyCommand('#credits 675332512414695441 5264')">
                                 <i class="fas fa-copy"></i> Copy
                             </button>
                         </div>
